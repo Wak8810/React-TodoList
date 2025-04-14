@@ -1,0 +1,1 @@
+export const TodoCard = "flex flex-col justify-between m-4 p-6 rounded-2xl shadow-lg border border-gray-200 max-w-md mx-auto"
