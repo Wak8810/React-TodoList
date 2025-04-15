@@ -57,7 +57,7 @@ function App() {
 
   return (
     <>
-      <nav className="flex items-center justify-between flex-wrap bg-teal-500 py-3 px-3 mb-3">
+      <nav className="flex items-center justify-between flex-wrap bg-teal-500 py-3 px-3 mb-4">
         <span className="text-gray-200 font-mono text-2xl tracking-[-2px] font-bold">SIMPLE-TODOLIST</span>
       </nav>
       {DelCheck ? (
