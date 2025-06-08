@@ -1,5 +1,5 @@
 export type todo = {
-    index: number;
+    id: number;
     text: string;
     priority: number;
     checked: boolean;
