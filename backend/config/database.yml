@@ -27,3 +27,10 @@ test:
 production:
   <<: *default
   url: <%= ENV['DATABASE_URL'] %>
+
+# Action Cableの設定
+cable:
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  url: <%= ENV['DATABASE_URL'] %>
