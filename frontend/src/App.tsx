@@ -6,7 +6,6 @@ import { TodoItem } from './components/TodoItem.tsx';
 import { todoService } from './services/todoService';
 
 function App() {
-  const [id, setId] = useState<number>(0);
   const [text, setText] = useState<string>("");
   const [todos, setTodos] = useState<todo[]>([]);
   const [priority, setPriority] = useState<number>(3);
@@ -18,11 +17,8 @@ function App() {
     const fetchTodos = async () => {
       try {
         const data = await todoService.getAllTodos();
-        console.log('Fetched todos:', data); // デバッグ用
-        setTodos(data);
-        // バックエンドのIDを使用するため、独自のID生成は不要
-        // const maxId = Math.max(...data.map(todo => todo.index), 0);
-        // setId(maxId + 1);
+        const sortedData = [...data].sort((a, b) => b.priority - a.priority);
+        setTodos(sortedData);
       } catch (error) {
         console.error('Failed to fetch todos:', error);
         alert('Todoの取得に失敗しました');
@@ -51,13 +47,11 @@ function App() {
   }
 
   const onClickDeleteScrean = (id: number) => {
-    console.log('Delete screen opened for id:', id); // デバッグ用
     setDelTodo(id);
     setDelCheck(true);
   }
 
   const onClickDelete = async (id: number) => {
-    console.log('Deleting todo with id:', id); // デバッグ用
     try {
       await todoService.deleteTodo(id);
       setTodos(todos.filter((todo) => todo.id !== id));
@@ -70,12 +64,10 @@ function App() {
   }
 
   const onClickChecked = async (checktodo: todo) => {
-    console.log('Checking todo:', checktodo); // デバッグ用
     try {
       const updatedTodo = await todoService.updateTodo(checktodo.id, {
         checked: !checktodo.checked
       });
-      console.log('Updated todo:', updatedTodo); // デバッグ用
       setTodos(todos.map((todo) => 
         todo.id === checktodo.id ? updatedTodo : todo
       ));
@@ -93,7 +85,6 @@ function App() {
       {DelCheck ? (
         <Checkdelete 
           todo={todos.find((todo) => {
-            console.log('Finding todo for deletion:', { DelTodo, todo }); // デバッグ用
             return todo.id === DelTodo;
           })}
           onDelete={onClickDelete}
@@ -127,7 +118,6 @@ function App() {
           </div>
           <ul>
             {todos.map((todo) => {
-              console.log('Rendering todo:', todo); // デバッグ用
               return (
                 <TodoItem 
                   key={todo.id}
