@@ -44,6 +44,7 @@ gem "thruster", require: false
 gem 'rack-cors'
 
 # アセットパイプライン用
+gem 'sprockets'
 gem 'sprockets-rails'
 
 group :development, :test do
