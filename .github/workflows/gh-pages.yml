@@ -31,8 +31,10 @@ jobs:
         with:
           node-version: 18
       - name: Install dependencies
+        working-directory: ./frontend
         run: npm install
       - name: Build
+        working-directory: ./frontend
         run: npm ci && npm run build
         env:
           PUBLIC_URL: /React-TodoList
